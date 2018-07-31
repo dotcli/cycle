@@ -21,6 +21,37 @@ function leftPadTime(number) {
   return `0${stringified}`
 }
 
+const clockFace = {
+  workClock: document.querySelector('.workClock'),
+  restClock: document.querySelector('.restClock'),
+  radius: undefined,
+  circumference: undefined,
+  initialize() {
+    this.radius = this.workClock.getAttribute('r')
+    this.circumference = this.radius * 2 * Math.PI
+    this.workClock.style.strokeDasharray = this.circumference
+    this.restClock.style.strokeDasharray = this.circumference
+    this.switchState(STATES.WORKING)
+  },
+  switchState(newState) {
+    if (newState === STATES.WORKING) {
+      this.workClock.style.opacity = 1;
+      this.restClock.style.opacity = 0;
+      this.restClock.style.strokeDashoffset = this.circumference
+    } else if (newState === STATES.RESTING) {
+      this.workClock.style.opacity = 0;
+      this.restClock.style.opacity = 1;
+    }
+  },
+  update(state, completionRate) {
+    if (state === STATES.WORKING) {
+      this.workClock.style.strokeDashoffset = completionRate * this.circumference
+    } else if (state === STATES.RESTING) {
+      this.restClock.style.strokeDashoffset = (completionRate + 1) * this.circumference
+    }
+  }
+}
+
 const view = {
   timeDisplay: document.querySelector('.timeDisplay'),
   stateDisplay: document.querySelector('.stateDisplay'),
@@ -44,12 +75,15 @@ const view = {
     // view should only get info from data,
     // not write to it.
     let timeRemain;
+    let timeRemainRate;
     if (timeThisCycle < workTime) {
       data.state = STATES.WORKING
       timeRemain = workTime - timeThisCycle
+      timeRemainRate = timeRemain / workTime
     } else {
       data.state = STATES.RESTING
       timeRemain = cycleTime - timeThisCycle
+      timeRemainRate = timeRemain / restTime
     }
     const minutes = Math.floor(timeRemain / 60 / 1000)
     const seconds = Math.floor((timeRemain / 1000) % 60)
@@ -58,12 +92,19 @@ const view = {
     this.stateDisplay.innerText = data.state
     document.title = `${timeDisplay} - ${data.state}`
 
+    const completionRate = 1 - timeRemainRate
+    clockFace.update(data.state, completionRate)
+
     // detect if state has changed on this update loop
-    // if yes, play the corresponding sound
     if (state === data.state) return;
+    // switch out which clock to display
+    clockFace.switchState(data.state);
+    // play the corresponding sound
     if (data.state === STATES.WORKING) this.workAudio.play();
     else if (data.state === STATES.RESTING) this.restAudio.play();
   }
 }
+
+clockFace.initialize();
 
 setInterval(() => {view.update(data)}, FPS)

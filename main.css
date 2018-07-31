@@ -7,3 +7,32 @@ body {
   color: #AEAEAE;
   font-family: monospace;
 }
+.app {
+  padding: 5rem 3rem;
+}
+.clockface {
+  width: 20rem;
+  height: 20rem;
+}
+.clockRail {
+  fill: none;
+  stroke: #303030;
+  stroke-width: 5;
+}
+.workClock, .restClock {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 5;
+  /* 
+    The value for stroke-dasharray and stroke-dashoffset
+    equals to the circle's circumference,
+    2 * 3.1415926 * radius
+  */
+  /* Rotate to let the stroke start at top */
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: opacity 0.3s ease-out;
+}
+
+.workClock { stroke: #ffffff; }
+.restClock { stroke: #505050; }
