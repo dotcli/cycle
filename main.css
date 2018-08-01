@@ -1,6 +1,33 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('assets/fonts/Montserrat-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: url('assets/fonts/Montserrat-Bold.ttf');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/Oswald-Regular.ttf');
+}
+
+/* Styles */
+
 html, body {
   margin: 0;
   padding : 0;
+  font-size: 16px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
 }
 body {
   background: #000000;
@@ -10,29 +37,46 @@ body {
 .app {
   padding: 5rem 3rem;
 }
-.clockface {
+.clockface, .clockTextDisplay {
   width: 20rem;
   height: 20rem;
 }
 .clockRail {
   fill: none;
   stroke: #303030;
-  stroke-width: 5;
+  stroke-width: 7;
 }
 .workClock, .restClock {
   fill: none;
   stroke-linecap: round;
-  stroke-width: 5;
-  /* 
-    The value for stroke-dasharray and stroke-dashoffset
-    equals to the circle's circumference,
-    2 * 3.1415926 * radius
-  */
+  stroke-width: 7;
   /* Rotate to let the stroke start at top */
   transform: rotate(-90deg);
   transform-origin: center;
   transition: opacity 0.3s ease-out;
 }
-
 .workClock { stroke: #ffffff; }
 .restClock { stroke: #505050; }
+
+.clockTextDisplay {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding: inherit;
+}
+.timeDisplay, .stateDisplay {
+  text-align: center;
+  color: #ffffff;
+}
+.stateDisplay {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 6.9rem;
+}
+.timeDisplay {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.4rem;
+  font-variant-numeric: tabular-nums;
+}
