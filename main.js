@@ -4,7 +4,7 @@ const FPS = 30
 
 // data that changes by user input
 const userData = new RData({
-  workMins: 0.25,
+  workMins: 2.5,
   restMins: 0.5,
   startTime: Date.now(),
 })
@@ -36,13 +36,22 @@ const renderedData = new RData({
 
 const btnRestartWork = document.querySelector('.btnRestartWork')
 const btnRestartRest = document.querySelector('.btnRestartRest')
-
 btnRestartWork.addEventListener('click', () => {
   userData.startTime = Date.now()
 })
-
 btnRestartRest.addEventListener('click', () => {
   userData.startTime = Date.now() - (userData.workMins * 60 * 1000)
+})
+
+const inputWorkMins = document.querySelector('.inputWorkMins')
+const inputRestMins = document.querySelector('.inputRestMins')
+inputWorkMins.value = userData.workMins
+inputRestMins.value = userData.restMins
+inputWorkMins.addEventListener('change', () => {
+  userData.workMins = inputWorkMins.value
+})
+inputRestMins.addEventListener('change', () => {
+  userData.restMins = inputRestMins.value
 })
 
 /**
