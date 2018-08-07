@@ -4,10 +4,31 @@ const FPS = 30
 
 // data that changes by user input
 const userData = new RData({
-  workMins: 2.5,
-  restMins: 0.5,
+  workMins: 25,
+  restMins: 5,
   startTime: Date.now(),
 })
+
+// calculate share hash
+function encodeHash(w, r, s) { return `${w}:${r}:${s}` }
+function encodeUserHash() { return encodeHash(userData.workMins, userData.restMins, userData.startTime) }
+// decodes a share hash.
+// returns array containing [workMins, restMins, and startTime]
+function decodeHash(hashValue) {
+  if (!hashValue.length) throw new Error('Empty hash ' + hashValue)
+  let parsingHash = hashValue
+  if (parsingHash[0] === '#') parsingHash = hashValue.substring(1)
+  const parts = parsingHash.split(':')
+  if (parts.length !== 3) throw new Error('Not a valid hash: ' + hashValue)
+  return parts
+}
+
+try {
+  const parts = decodeHash(location.hash)
+  userData.workMins = parts[0]
+  userData.restMins = parts[1]
+  userData.startTime = parts[2]
+} catch (error) { console.info('No valid hash found. Using default cycle value.') }
 
 // data computed from userData,
 // and only has to change when userData changes
@@ -20,19 +41,31 @@ lazyData.register('cycleTime', (lazyData.workTime + lazyData.restTime))
 userData.onChange('workMins', (val) => {
   lazyData.workTime = val * 60 * 1000
   lazyData.cycleTime = lazyData.workTime + lazyData.restTime
+  renderedData.hash = encodeUserHash()
 })
 userData.onChange('restMins', (val) => {
   lazyData.restTime = val * 60 * 1000
   lazyData.cycleTime = lazyData.workTime + lazyData.restTime
+  renderedData.hash = encodeUserHash()
+})
+userData.onChange('startTime', (val) => {
+  renderedData.hash = encodeUserHash()
 })
 
 const renderedData = new RData({
   timeDisplay: '00:00',
   state: '',
   completionRate: 0,
+  hash: encodeUserHash(),
 })
 
 // set up inputs to modify data
+const shareUrl = document.querySelector('.shareUrl')
+shareUrl.value = location.protocol + location.host + location.pathname + '#' + renderedData.hash
+renderedData.onChange('hash', (val) => {
+  location.hash = val
+  shareUrl.value = location.protocol + location.host + location.pathname + '#' + renderedData.hash
+})
 
 const btnRestartWork = document.querySelector('.btnRestartWork')
 const btnRestartRest = document.querySelector('.btnRestartRest')
