@@ -35,11 +35,19 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 .app {
-  padding: 5rem 3rem;
+  padding: 5rem 0;
+  max-width: 30rem;
+  min-width: 25rem;
+  margin: 0 auto;
 }
-.clockface, .clockTextDisplay {
+.clockContainer {
+  margin: 0 auto;
+  margin-bottom: 2rem;
   width: 20rem;
   height: 20rem;
+  position: relative;
+}
+.clockface, .clockTextDisplay {
   pointer-events: none;
 }
 .clockRail {
@@ -64,6 +72,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
+  width: 100%;
   padding: inherit;
 }
 .timeDisplay, .stateDisplay {
@@ -83,4 +92,62 @@ body {
   /* HACK align by left, so that numbers don't jump around */
   text-align: left;
   padding-left: 6.4rem;
+}
+
+.restartButtonContainer {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+  margin-bottom: 1.1rem;
+}
+.btnRestart {
+  text-transform: uppercase;
+  background: #303030;
+  color: #e5e5e5;
+  padding: 0.5rem 0rem;
+  margin: 0 0.4rem;
+  width: 10rem;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.durationChangeContainer {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.durationInput {
+  width: 2rem;
+  text-align: center;
+}
+
+.shareContainer {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-bottom: 1em;
+  display: flex;
+  padding: 0 1em;
+}
+.shareUrl {
+  text-transform: inherit;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  margin-left: 1em;
+}
+
+/* style input fields to our liking */
+input[type=number], input[type=text] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  background: inherit;
+  font: inherit;
+  color: #e5e5e5;
+  border: none;
+  border-bottom: 2px solid #505050;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

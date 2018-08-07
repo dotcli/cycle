@@ -12,28 +12,30 @@
 
   <div class="app">
 
-    <svg class="clockface" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle class="clockRail" cx="50" cy="50" r="40"/>
-      <circle class="restClock" cx="50" cy="50" r="40"/>
-      <circle class="workClock" cx="50" cy="50" r="40"/>
-    </svg>
-      
-    <div class="clockTextDisplay">
-      <div class="stateDisplay"></div>
-      <div class="timeDisplay"></div>
+    <div class="clockContainer">
+      <svg class="clockface" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle class="clockRail" cx="50" cy="50" r="40"/>
+        <circle class="restClock" cx="50" cy="50" r="40"/>
+        <circle class="workClock" cx="50" cy="50" r="40"/>
+      </svg>
+        
+      <div class="clockTextDisplay">
+        <div class="stateDisplay"></div>
+        <div class="timeDisplay"></div>
+      </div>
     </div>
 
     <div class="restartButtonContainer">
-      <button class="btnRestartWork">restart work</button>
-      <button class="btnRestartRest">restart rest</button>
+      <div class="btnRestart btnRestartWork">restart work</div>
+      <div class="btnRestart btnRestartRest">restart rest</div>
     </div>
 
     <div class="durationChangeContainer">
       <span>Work for </span>
-      <input type="number" class="inputWorkMins">
+      <input type="number" class="durationInput inputWorkMins">
       <span>mins.</span>
       <span>Rest for </span>
-      <input type="number" class="inputRestMins">
+      <input type="number" class="durationInput inputRestMins">
       <span>mins.</span>
     </div>
 
