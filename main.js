@@ -32,6 +32,19 @@ const renderedData = new RData({
   completionRate: 0,
 })
 
+// set up inputs to modify data
+
+const btnRestartWork = document.querySelector('.btnRestartWork')
+const btnRestartRest = document.querySelector('.btnRestartRest')
+
+btnRestartWork.addEventListener('click', () => {
+  userData.startTime = Date.now()
+})
+
+btnRestartRest.addEventListener('click', () => {
+  userData.startTime = Date.now() - (userData.workMins * 60 * 1000)
+})
+
 /**
  * Pads the time display with extra zero, if needed.
  * Suitable for second, minute, or hour.
