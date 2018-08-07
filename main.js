@@ -61,10 +61,10 @@ const renderedData = new RData({
 
 // set up inputs to modify data
 const shareUrl = document.querySelector('.shareUrl')
-shareUrl.value = location.protocol + location.host + location.pathname + '#' + renderedData.hash
+shareUrl.value = location.origin + location.pathname + '#' + renderedData.hash
 renderedData.onChange('hash', (val) => {
   location.hash = val
-  shareUrl.value = location.protocol + location.host + location.pathname + '#' + renderedData.hash
+  shareUrl.value = location.origin + location.pathname + '#' + renderedData.hash
 })
 
 const btnRestartWork = document.querySelector('.btnRestartWork')
