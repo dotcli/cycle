@@ -1,6 +1,6 @@
 Cycle
 ====
-> A pomodoro timer
+> A timer for sustainable productivity.
 
 ## Acknowledgement
 
