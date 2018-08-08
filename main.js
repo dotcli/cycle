@@ -189,3 +189,14 @@ function loop() {
 clockFace.initialize()
 
 setInterval(loop, 1000 / FPS)
+
+
+// toggle About section
+const toggleAbout = document.querySelector('.toggleAbout')
+const aboutSection = document.querySelector('.infoContainer')
+let isAboutActive = false
+toggleAbout.addEventListener('click', () => {
+  if (!isAboutActive) aboutSection.classList.add('active')
+  else aboutSection.classList.remove('active')
+  isAboutActive = !isAboutActive
+})

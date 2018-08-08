@@ -151,3 +151,37 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+.aboutToggleContainer {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+}
+.toggleAbout {
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 auto;
+  color: #505050;
+  border-bottom: 2px solid #505050;
+}
+.toggleAbout:hover { color: #e5e5e5; }
+.infoContainer {
+  font-size: 0.9rem;
+  color: #505050;
+  line-height: 1.5em;
+  display: none;
+  padding: 0 1em;
+}
+.infoContainer.active {
+  display: inherit;
+}
+
+a {
+  color: #AEAEAE;
+  text-decoration: none;
+  border-bottom: 2px solid #505050;
+}
+a:visited { color: #505050; }
+a:focus, a:hover { color: #e5e5e5; }
