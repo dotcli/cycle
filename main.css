@@ -130,7 +130,7 @@ body {
   padding: 0 1em;
 }
 .shareUrl {
-  text-transform: inherit;
+  text-transform: initial;
   text-overflow: ellipsis;
   flex-grow: 1;
   margin-left: 1em;
